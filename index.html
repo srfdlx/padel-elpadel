@@ -3,8 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="theme-color" content="#F6EEE1">
+<meta name="theme-color" content="#F5EEDD">
 <title>Padel Turnier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
 <script>
 (function(){
   try{
@@ -16,29 +19,29 @@
 </script>
 <style>
   :root{
-    --bg:#F6EEE1;
-    --card-bg:#EFE3D1;
-    --border:#DED0B4;
-    --text:#26201A;
-    --muted:#93897A;
-    --accent:#BC5A2C;
-    --accent-soft:#F1DDC5;
-    --danger:#A83B34;
-    --danger-soft:#F3DEDA;
-    --font-serif:Georgia,'Iowan Old Style','Times New Roman',serif;
-    --font-mono:ui-monospace,'SF Mono','Cascadia Mono','Roboto Mono',Menlo,Consolas,'Courier New',monospace;
-    --font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --bg:#F5EEDD;
+    --card-bg:#FFFFFF;
+    --border:#C7CBF2;
+    --text:#1C1B2E;
+    --muted:#8A8578;
+    --accent:#2E32C7;
+    --accent-soft:#E4E5FA;
+    --danger:#E8452B;
+    --danger-soft:#FBDED4;
+    --font-serif:'Fredoka',var(--font-sans);
+    --font-mono:'Poppins',var(--font-sans);
+    --font-sans:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   }
   :root[data-theme="dark"]{
-    --bg:#1B1712;
-    --card-bg:#251F18;
-    --border:#3B3327;
-    --text:#EDE3D2;
-    --muted:#8C8172;
-    --accent:#E27E48;
-    --accent-soft:#37281A;
-    --danger:#E2685D;
-    --danger-soft:#3B221E;
+    --bg:#15131F;
+    --card-bg:#1E1B2E;
+    --border:#3A3763;
+    --text:#EDE9F5;
+    --muted:#8D89A6;
+    --accent:#6C70FF;
+    --accent-soft:#25234A;
+    --danger:#FF6B52;
+    --danger-soft:#3A241D;
   }
   *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   html,body{ margin:0; padding:0; }
@@ -58,7 +61,7 @@
     display:flex; justify-content:space-between; align-items:center;
     gap:8px; flex-wrap:wrap;
   }
-  .topbar-left{ display:flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:0.78rem; letter-spacing:0.03em; text-transform:uppercase; color:var(--text); }
+  .topbar-left{ display:flex; align-items:center; gap:8px; font-family:var(--font-mono); font-weight:600; font-size:0.78rem; letter-spacing:0.03em; text-transform:uppercase; color:var(--text); }
   .topbar-dot{ width:7px; height:7px; border-radius:50%; background:var(--accent); flex:none; }
 
   .theme-toggle{
@@ -73,8 +76,8 @@
 
   .eyebrow{ font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
   .hero{ margin-bottom:22px; }
-  .hero-title{ font-family:var(--font-serif); font-size:2.4rem; line-height:1.05; margin:0 0 18px; font-weight:400; }
-  .accent-italic{ color:var(--accent); font-style:italic; }
+  .hero-title{ font-family:var(--font-serif); font-size:2.4rem; line-height:1.05; margin:0 0 18px; font-weight:600; }
+  .accent-italic{ color:var(--danger); font-style:normal; }
 
   .meta-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px 18px; margin-bottom:18px; }
   .meta-label{ font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.05em; text-transform:uppercase; color:var(--muted); margin-bottom:2px; }
@@ -95,8 +98,8 @@
   .avatar:first-child{ margin-left:0; }
   .crew-caption{ font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.04em; text-transform:uppercase; color:var(--muted); }
 
-  .section-label{ font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
-  h2{ font-family:var(--font-serif); font-weight:400; font-size:1.5rem; margin:0 0 14px; }
+  .section-label{ font-family:var(--font-mono); font-weight:600; font-size:0.7rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
+  h2{ font-family:var(--font-serif); font-weight:600; font-size:1.5rem; margin:0 0 14px; }
 
   .card{
     background:var(--card-bg);
@@ -106,7 +109,7 @@
     margin-bottom:20px;
   }
   details.names-card summary{
-    cursor:pointer; font-family:var(--font-serif); font-size:1.3rem; padding:2px 0;
+    cursor:pointer; font-family:var(--font-serif); font-weight:600; font-size:1.3rem; padding:2px 0;
     list-style:none;
   }
   details.names-card summary::-webkit-details-marker{ display:none; }
