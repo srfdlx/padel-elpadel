@@ -219,7 +219,7 @@
 <body>
 
 <header class="topbar">
-  <div class="topbar-left"><span class="topbar-dot"></span>Padel Fermoselle</div>
+  <div class="topbar-left"><span class="topbar-dot"></span>elPadel Winterthur</div>
   <button id="themeToggle" class="theme-toggle" type="button" aria-label="Dunkles Design umschalten" aria-pressed="false">
     <span class="theme-toggle-icon" aria-hidden="true">☾</span>
   </button>
@@ -227,18 +227,20 @@
 
 <main>
   <section class="hero">
-    <div class="eyebrow">SIETE AMIGOS · TURNIER</div>
+    <div class="eyebrow">SEIS AMIGOS · TURNIER</div>
     <h1 class="hero-title">Padel <span class="accent-italic">Turnier.</span></h1>
     <div class="meta-grid">
       <div><div class="meta-label">Modus</div><div class="meta-value">Doppel · Round Robin</div></div>
-      <div><div class="meta-label">Runden</div><div class="meta-value">21</div></div>
-      <div><div class="meta-label">Spieler</div><div class="meta-value">7</div></div>
+      <div><div class="meta-label">Runden</div><div class="meta-value">15</div></div>
+      <div><div class="meta-label">Spieler</div><div class="meta-value">6</div></div>
       <div><div class="meta-label">Format</div><div class="meta-value">Tiebreak</div></div>
+      <div><div class="meta-label">Ort</div><div class="meta-value">elPadel, Winterthur</div></div>
+      <div><div class="meta-label">Datum</div><div class="meta-value">1. November</div></div>
       <div class="meta-leader"><div class="meta-label">Führung</div><div class="meta-value" id="leaderInfo">–</div></div>
     </div>
     <div class="crew-box">
       <div class="crew-avatars" id="crewAvatars"></div>
-      <div class="crew-caption">Padel Crew · 7 Spieler</div>
+      <div class="crew-caption">Padel Crew · 6 Spieler</div>
     </div>
   </section>
 
@@ -262,14 +264,14 @@
     <div class="section-label">03 · Teilen</div>
     <h2>Ergebnisse teilen</h2>
     <p class="hint">Dauerhafter Link für alle Teilnehmer — zeigt bei jedem Aufruf den zuletzt veröffentlichten Stand:</p>
-    <input type="text" class="share-link-input" readonly value="https://srfdlx.github.io/padel-fermoselle/ergebnisse.html" onclick="this.select()" style="margin-bottom:16px;">
+    <input type="text" class="share-link-input" readonly value="https://srfdlx.github.io/padel-elpadel/ergebnisse.html" onclick="this.select()" style="margin-bottom:16px;">
 
     <details class="token-help">
       <summary>Wie bekomme ich einen Token?</summary>
       <ol class="token-steps">
         <li>github.com → Profilbild → Settings → Developer settings</li>
         <li>Personal access tokens → Fine-grained tokens → Generate new token</li>
-        <li>Repository access → "Only select repositories" → padel-fermoselle</li>
+        <li>Repository access → "Only select repositories" → padel-elpadel</li>
         <li>Permissions → Repository permissions → Contents → "Read and write"</li>
         <li>Token generieren, kopieren, beim ersten Klick auf "Veröffentlichen" hier einfügen</li>
       </ol>
@@ -301,36 +303,30 @@
   "use strict";
 
   var SCHEDULE = [
-    [1,4,3,5],
-    [2,7,4,6],
+    [1,4,2,3],
+    [5,6,2,3],
+    [5,6,1,4],
+    [3,5,1,2],
+    [4,6,1,2],
+    [4,6,3,5],
+    [2,4,1,5],
     [3,6,1,5],
-    [2,3,4,7],
-    [1,2,5,6],
-    [3,7,1,4],
-    [5,7,2,3],
-    [4,5,1,6],
-    [3,7,1,2],
-    [5,7,4,6],
-    [1,3,2,6],
-    [2,5,4,7],
-    [1,3,6,7],
+    [3,6,2,4],
+    [1,3,4,5],
+    [2,6,4,5],
+    [2,6,1,3],
     [2,5,3,4],
-    [5,6,1,7],
-    [3,4,2,6],
-    [1,5,2,7],
-    [4,5,3,6],
-    [2,4,1,7],
-    [6,7,3,5],
-    [1,6,2,4]
+    [1,6,3,4],
+    [1,6,2,5]
   ];
 
-  var PLAYER_COLORS = ["#E3B2A0","#B7C79E","#D9BE95","#A7C6C4","#E1AEC0","#BFC08A","#AFB3D9"];
+  var PLAYER_COLORS = ["#E3B2A0","#B7C79E","#D9BE95","#A7C6C4","#E1AEC0","#BFC08A"];
 
   var STORAGE_KEY = "padelFermoselleV1";
 
   function defaultState(){
     return {
-      names: ["","","","","","",""],
+      names: ["","","","","",""],
       results: SCHEDULE.map(function(){ return { a:"", b:"" }; })
     };
   }
@@ -340,7 +336,7 @@
       var raw = localStorage.getItem(STORAGE_KEY);
       if(!raw) return defaultState();
       var parsed = JSON.parse(raw);
-      if(!parsed || !Array.isArray(parsed.names) || parsed.names.length !== 7 ||
+      if(!parsed || !Array.isArray(parsed.names) || parsed.names.length !== 6 ||
          !Array.isArray(parsed.results) || parsed.results.length !== SCHEDULE.length){
         return defaultState();
       }
@@ -419,13 +415,13 @@
   function renderCrewAvatars(){
     var box = document.getElementById("crewAvatars");
     box.innerHTML = "";
-    for(var i=1;i<=7;i++){ box.appendChild(createAvatar(i)); }
+    for(var i=1;i<=6;i++){ box.appendChild(createAvatar(i)); }
   }
 
   function renderNames(){
     var grid = document.getElementById("namesGrid");
     grid.innerHTML = "";
-    for(var i=1;i<=7;i++){
+    for(var i=1;i<=6;i++){
       (function(i){
         var wrap = document.createElement("div");
         wrap.className = "name-field";
@@ -471,7 +467,7 @@
   function renderRounds(){
     var list = document.getElementById("roundsList");
     list.innerHTML = "";
-    var all = [1,2,3,4,5,6,7];
+    var all = [1,2,3,4,5,6];
 
     SCHEDULE.forEach(function(entry, idx){
       var a1 = entry[0], a2 = entry[1], b1 = entry[2], b2 = entry[3];
@@ -566,7 +562,7 @@
 
   function computeStandings(){
     var stats = {};
-    for(var p=1;p<=7;p++){ stats[p] = { num:p, points:0, played:0, wins:0 }; }
+    for(var p=1;p<=6;p++){ stats[p] = { num:p, points:0, played:0, wins:0 }; }
 
     SCHEDULE.forEach(function(entry, idx){
       if(!isRoundPlayed(idx)) return;
@@ -678,7 +674,7 @@
 
   var GH_TOKEN_KEY = "padelFermoselleGhToken";
   var GH_OWNER = "srfdlx";
-  var GH_REPO = "padel-fermoselle";
+  var GH_REPO = "padel-elpadel";
   var GH_BRANCH = "main";
   var GH_PATH = "results.json";
 
