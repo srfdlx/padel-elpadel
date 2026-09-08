@@ -85,6 +85,33 @@
   .meta-leader{ grid-column:1 / -1; }
   .meta-leader #leaderInfo{ color:var(--accent); font-weight:600; }
 
+  .info-btn{
+    background:none; border:none; padding:0; margin-left:2px; cursor:pointer;
+    color:var(--accent); font-size:0.95rem; line-height:1; vertical-align:middle;
+    font-family:var(--font-sans);
+  }
+  [hidden]{ display:none !important; }
+  .modal-overlay{
+    position:fixed; inset:0; z-index:100; background:rgba(20,18,12,0.5);
+    display:flex; align-items:center; justify-content:center; padding:20px;
+  }
+  .modal-box{
+    background:var(--card-bg); border:1px solid var(--border); border-radius:18px;
+    max-width:420px; width:100%; max-height:82vh; overflow-y:auto; padding:18px 20px;
+  }
+  .modal-header{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; }
+  .modal-header h3{ font-family:var(--font-serif); font-weight:600; font-size:1.2rem; margin:0; }
+  .modal-close{
+    background:none; border:none; color:var(--muted); font-size:1.1rem; cursor:pointer;
+    width:30px; height:30px; flex:none; border-radius:50%;
+  }
+  .modal-close:active{ background:var(--accent-soft); }
+  .modal-body{ font-size:0.92rem; line-height:1.5; }
+  .modal-body p{ margin:0 0 10px; }
+  .modal-body ul{ margin:0 0 12px; padding-left:20px; }
+  .modal-body li{ margin-bottom:6px; }
+  .modal-summary{ color:var(--muted); font-style:normal; margin-bottom:0 !important; }
+
   .crew-box{
     display:flex; align-items:center; gap:10px; flex-wrap:wrap;
     border:1px dashed var(--border); border-radius:14px; padding:12px 14px; margin-bottom:26px;
@@ -229,6 +256,29 @@
   </button>
 </header>
 
+<div id="formatModal" class="modal-overlay" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="formatModalTitle">
+    <div class="modal-header">
+      <h3 id="formatModalTitle">Americano Format</h3>
+      <button id="formatModalClose" class="modal-close" type="button" aria-label="Schliessen">✕</button>
+    </div>
+    <div class="modal-body">
+      <p><strong>Format:</strong> Americano (Doppel, Partner wechseln jede Runde)</p>
+      <p><strong>Spieler:</strong> 6</p>
+      <p><strong>Runden:</strong> 15, auf einem Court</p>
+      <p><strong>Dauer:</strong> ca. 2 Stunden</p>
+      <p><strong>Ablauf:</strong></p>
+      <ul>
+        <li>Jeder spielt 10 Runden, pausiert 5 Runden</li>
+        <li>Jeder spielt genau zweimal mit jedem anderen als Partner</li>
+        <li>Jedes Spiel wird auf total 24 Punkte gespielt (Summe beider Teams = 24)</li>
+        <li>Gewertet wird individuell — die eigenen erspielten Punkte zählen, nicht das Team</li>
+      </ul>
+      <p class="modal-summary">Kurz gesagt: Jeder trifft jeden zweimal als Partner, keiner sitzt lange aus, am Ende gewinnt, wer über alle Runden die meisten Punkte gesammelt hat.</p>
+    </div>
+  </div>
+</div>
+
 <main>
   <section class="hero">
     <div class="eyebrow">SEIS AMIGOS · TURNIER</div>
@@ -237,7 +287,7 @@
       <div><div class="meta-label">Modus</div><div class="meta-value">Doppel · Round Robin</div></div>
       <div><div class="meta-label">Runden</div><div class="meta-value">15</div></div>
       <div><div class="meta-label">Spieler</div><div class="meta-value">6</div></div>
-      <div><div class="meta-label">Format</div><div class="meta-value">Americano</div></div>
+      <div><div class="meta-label">Format</div><div class="meta-value">Americano <button id="formatInfoBtn" class="info-btn" type="button" aria-label="Format-Infos anzeigen" aria-haspopup="dialog">ⓘ</button></div></div>
       <div><div class="meta-label">Ort</div><div class="meta-value">elPadel, Winterthur</div></div>
       <div><div class="meta-label">Datum</div><div class="meta-value">1. November</div></div>
       <div class="meta-leader"><div class="meta-label">Führung</div><div class="meta-value" id="leaderInfo">–</div></div>
@@ -819,7 +869,7 @@
   function applyTheme(theme){
     document.documentElement.setAttribute("data-theme", theme);
     var meta = document.querySelector('meta[name="theme-color"]');
-    if(meta) meta.setAttribute("content", theme === "dark" ? "#1B1712" : "#F6EEE1");
+    if(meta) meta.setAttribute("content", theme === "dark" ? "#15131F" : "#FFFFFF");
     var btn = document.getElementById("themeToggle");
     if(btn){
       btn.querySelector(".theme-toggle-icon").textContent = theme === "dark" ? "☀" : "☾";
@@ -837,6 +887,21 @@
     });
   }
 
+  function initFormatModal(){
+    var btn = document.getElementById("formatInfoBtn");
+    var modal = document.getElementById("formatModal");
+    var closeBtn = document.getElementById("formatModalClose");
+    if(!btn || !modal || !closeBtn) return;
+
+    function open(){ modal.hidden = false; }
+    function close(){ modal.hidden = true; }
+
+    btn.addEventListener("click", open);
+    closeBtn.addEventListener("click", close);
+    modal.addEventListener("click", function(e){ if(e.target === modal) close(); });
+    document.addEventListener("keydown", function(e){ if(e.key === "Escape" && !modal.hidden) close(); });
+  }
+
   renderCrewAvatars();
   renderNames();
   renderRounds();
@@ -845,6 +910,7 @@
   initShare();
   initPublish();
   initTheme();
+  initFormatModal();
 })();
 </script>
 
