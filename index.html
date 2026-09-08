@@ -196,6 +196,7 @@
   .team.team-a{ align-items:flex-start; }
   .team.team-b{ align-items:flex-end; }
   .team-names{ font-family:var(--font-serif); font-size:0.92rem; line-height:1.25; word-break:break-word; min-height:2.4em; display:flex; align-items:center; }
+  .team-sep{ margin:0 0.35em; flex:none; }
   .team.team-b .team-names{ text-align:right; justify-content:flex-end; }
   .arrow{ color:var(--muted); font-family:var(--font-mono); font-size:1rem; padding-top:10px; flex:none; }
 
@@ -410,7 +411,10 @@
     var div = document.createElement("div");
     div.className = "team-names";
     div.appendChild(createPlayerSpan(p1));
-    div.appendChild(document.createTextNode(" & "));
+    var amp = document.createElement("span");
+    amp.className = "team-sep";
+    amp.textContent = "&";
+    div.appendChild(amp);
     div.appendChild(createPlayerSpan(p2));
     return div;
   }
